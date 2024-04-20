@@ -227,7 +227,14 @@
 
 		}
 
+		update()
 		window.setInterval(update, 1000)
+
+		let dateSpan = document.querySelector('#next-dates')
+		let dates = next7RankedDays(Date.now())
+		dateSpan.textContent = dates.join(', ') + ', and so on...'
+
+		
 
 
 		// https://emojikitchen.dev/ -> maybe frog variants?
