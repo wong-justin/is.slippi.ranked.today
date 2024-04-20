@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Is Slippi Ranked Free Today?</title>
 		<meta name="description" content="Check if Ranked mode on Slippi will be free-to-play today. It's happened every 4 days since April 15!">
-		<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>❔</text></svg>"> 
+		<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>❔</text></svg>">
 		<!-- <link rel="icon" href="data:,">  -->
 		<!-- NOTE TO SELF: aim for under 14kb page size, a single TCP packet in a single network request, for peak performance. aka inline everything -->
 		<!-- also note: content dependencies include slippi launcher's timer code (ie. must update if the 4 day pattern changes), and ranked access pricing. regularly check fizzi's dev updates, or even better, have an automated system notify me about changes (scrape slipppi pricing page? watch changes to slippi launcher repo?) -->
@@ -21,7 +21,7 @@
 		}
 
 		/* @link https://utopia.fyi/space/calculator?c=240,18,1.2,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s&g=s,l,xl,12 */
-		
+
 		:root {
   		--space-m: clamp(1.6875rem, 1.6425rem + 0.3vi, 1.875rem);
 
@@ -53,7 +53,6 @@
 			padding-inline-end: var(--space-xs-2xl);
 		}
 
-		/* header:last-child { */
 		#navigation {
 			flex-grow: 1;
 			position: absolute;
@@ -72,7 +71,7 @@
 			margin: 1em;
 			margin-block-start: -1em;
 		}
-		
+
 		.question {
 			display: block;
 			margin-block-start: 1em;
@@ -134,7 +133,7 @@
 			<ul>
 				<li>
 					every four days, starting at 8 AM UTC.
-					the next free ranked days will be 
+					the next free ranked days will be
 					<span id="next-dates">...</span>
 					<noscript>needing JavaScript</noscript>
 				</li>
@@ -165,9 +164,9 @@
 			// returns : { isHappening : bool, msRemaining : int, millis since epoch in UTC }
 			//
 			// isHappening === true
-			//                             
+			//
 			//     prevStart [---now---|prevEnd --------------------] nextStart
-			//                        
+			//
 			//
 			//
 			// isHappening === false
@@ -175,13 +174,16 @@
 			//     prevStart [---------|prevEnd ---------now--------] nextStart
 			//
 			let daysSinceFirstStart = Math.floor( (now - FREE_ACCESS_START_MS) / MS_PER_DAY )
-			let daysUntilNextStart = ( 4 - (daysSinceFirstStart % 4) )
+			let daysUntilNextStart = 4 - (daysSinceFirstStart % 4)
 			let nextStart = FREE_ACCESS_START_MS + (daysSinceFirstStart + daysUntilNextStart) * MS_PER_DAY
 			let prevStart = nextStart - MS_BETWEEN_RANKED_DAYS
 			let prevEnd = prevStart + MS_PER_DAY
 
 			let isHappening = prevEnd > now
-			let msRemaining = (isHappening ? prevEnd - now : nextStart - now )
+			let msRemaining = (isHappening ?
+				prevEnd - now :
+				nextStart - now
+			)
 
 			return {isHappening, msRemaining}
 		}
@@ -193,7 +195,7 @@
 			let dateStrings = []
 			let dateFormattingOptions = { day: 'numeric', month: 'long' }
 			let daysSinceFirstStart = Math.floor( (now - FREE_ACCESS_START_MS) / MS_PER_DAY )
-			let daysUntilNextStart = ( 4 - (daysSinceFirstStart % 4) )
+			let daysUntilNextStart = 4 - (daysSinceFirstStart % 4)
 			let nextStart = FREE_ACCESS_START_MS + (daysSinceFirstStart + daysUntilNextStart) * MS_PER_DAY
 
 			let i = 0;
@@ -243,7 +245,10 @@
 			// quantity : int
 			// noun : string
 			// returns : string
-			return (quantity == 1 ? `1 ${noun}` : `${quantity} ${noun}s`)
+			return (quantity == 1 ?
+				`1 ${noun}` :
+				`${quantity} ${noun}s`
+			)
 		}
 
 		let update = () => {
@@ -274,7 +279,9 @@
 
 		}
 
-		update()
+		// MAIN
+
+		update() // once, immediately for initial render
 		window.setInterval(update, 1000)
 
 		let dateSpan = document.querySelector('#next-dates')
