@@ -126,7 +126,8 @@
 		<footer>
 			<a href="#faq" class="question" id="navigation">what?</a>
 			<ul id="faq">
-				<li>take a look at <a href="https://slippi.gg">slippi.gg</a></li>
+				<li>check out <a href="https://slippi.gg">slippi.gg</a>, which solves matchmaking for the best game in the world</li>
+				<li>unlimited ranked access is $5 USD per month, but some days you can try ranked for free</li>
 				<li id="extra">you might want a mental health hotline too: 1-800-273-TALK</li>
 			</ul>
 			<span class="question">when?</span>
@@ -140,7 +141,7 @@
 			</ul>
 			<span class="question">who?</span>
 			<ul>
-				<li>the main slippi dev is <a href="https://twitter.com/fizzi36">@Fizzi36</a>, along with a team of contributors.</li>
+				<li>the main slippi dev is <a href="https://twitter.com/fizzi36">@Fizzi36</a>, along with a team of contributors</li>
 				<li>but this little site is from <a href="https://wonger.dev">me</a></li>
 			</ul>
 		</footer>
@@ -256,7 +257,7 @@
 			let {isHappening, msRemaining} = isItRanked(now)
 
 			if (isHappening) {
-				document.title = 'YES — Slippi Ranked is free to play'
+				document.title = 'YES — Slippi Ranked is free to play right now'
 				h1.textContent = 'YES'
 				timer.textContent = `you have ${formatDuration(msRemaining)} left to grind!`
 				extra.style.display = 'list-item'
@@ -264,7 +265,7 @@
 				favicon.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>✔️</text></svg>"
 			}
 			else {
-				document.title = 'NO — Slippi Ranked is not free to play'
+				document.title = 'NO — Slippi Ranked is not free to play right now'
 				h1.textContent = 'NO'
 				timer.textContent = `you gotta wait ${formatDuration(msRemaining)}`
 				extra.style.display = 'none'
@@ -281,7 +282,7 @@
 		dateSpan.textContent = dates.join(', ') + ', and so on...'
 
 
-		// https://emojikitchen.dev/ -> maybe frog variants?
+		// https://emojikitchen.dev/ for images... maybe frog variants?
 	</script>
 
 </html>
