@@ -4,10 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Is Slippi Ranked Free Today?</title>
+		<meta name="description" content="Check if Slippi Ranked is free today. It's happened every 4 days since April 15!">
+		<meta name="keywords" content="">
 		<link rel="icon" href="data:,"> 
-		<!-- aim for under 14kb page and one single network request for peak performance -->
-		<!-- inline favicon and styles and scripts, and use system fonts -->
-
+		<!-- NOTE TO SELF: aim for under 14kb page size, a single TCP packet in a single network request, for peak performance -->
+		<!-- so inline favicon and styles and scripts, and use system fonts -->
 		<style>
 
 		/* @link https://utopia.fyi/type/calculator?c=240,18,1.125,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s|xs-xl&g=s,l,xl,12 */
@@ -73,6 +74,7 @@
 
 		.tiny {
 			font-size: var(--step--2);
+			line-height: 1.5em;
 		}
 
 		p {
@@ -108,6 +110,7 @@
 		let h1 = document.querySelector('h1')
 		let timer = document.querySelector('#timer')
 		let extra = document.querySelector('#extra')
+		let favicon = document.querySelector("link[rel~='icon']")
 
 		// https://github.com/project-slippi/slippi-launcher/pull/434/files#diff-44b494a9d47f2927c5fc59ecbf1419262f55cd74bf503c9b2c3767a2fbf985bcR15-R70
 
@@ -181,19 +184,28 @@
 
 		let update = () => {
 			// contains side-effects to update display
+			// TODO: save prev update result, and compare if isHappening === wasHappening,
+			// and if so then don't change anything
 
-			let now = Date.now() // Date.UTC(2024, 3, 20, 9, 1, 0) //
+			let now = Date.now()
+			// now = Date.UTC(2024, 3, 20, 7, 59, 0) // example yes
+			// now = Date.UTC(2024, 3, 20, 8, 0, 0) // example no
 			let {isHappening, msRemaining} = isItRanked(now)
 
 			if (isHappening) {
-				document.title = h1.textContent = 'YES'
+				document.title = 'YES — Slippi Ranked is free to play'
+				h1.textContent = 'YES'
 				timer.textContent = `you have ${formatDuration(msRemaining)} left to grind!`
 				extra.style.display = 'block'
+				// favicon.href = 'data:image/svg+xml;utf8,<svg...>'
+				favicon.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>✔️</text></svg>"
 			}
 			else {
-				document.title = h1.textContent = 'NO'
+				document.title = 'NO — Slippi Ranked is not free to play'
+				h1.textContent = 'NO'
 				timer.textContent = `you gotta wait ${formatDuration(msRemaining)}`
 				extra.style.display = 'none'
+				favicon.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>❌</text></svg>"
 			}
 
 		}
