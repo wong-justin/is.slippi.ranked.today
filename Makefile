@@ -2,8 +2,19 @@
 #   make dev PORT=<port>
 #
 # dependencies: none
-build: index.html
+.PHONY: build
+build: index.html 
 
+# If using custom svg icons, the pngs should be downloaded, then manually converted, then manually inlined:
+# build: index.html check.svg x.svg
+# check.svg:
+# 	curl -o check.png 'https://em-content.zobj.net/source/microsoft/74/heavy-check-mark_2714.png'
+# x.svg:
+# 	curl -o x.png 'https://em-content.zobj.net/source/microsoft/74/cross-mark_274c.png'
+# i used this web tool to manually convert png to svg:
+# https://svgtrace.com/png-to-svg
+#
+# BUT the easier way is native emoji favicons
 
 # Note that inner 'make' within this makefile also has stdout hidden,
 #   due to nearly insuppressible noisy logs
