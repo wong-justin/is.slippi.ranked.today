@@ -24,7 +24,7 @@
 		
 		:root {
 			/* Custom pairs */
-  		--space-l-3xl: clamp(2.25rem, 0.99rem + 8.4vi, 7.5rem);
+			--space-m-3xl: clamp(1.6875rem, 0.2925rem + 9.3vi, 7.5rem);
   		--space-xs-2xl: clamp(0.875rem, -0.115rem + 6.6vi, 5rem);
 		}
 
@@ -36,45 +36,57 @@
 		}
 
 		body {
-			min-height: 100vh;
-			min-height: 100svh;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 		}
 
-		main {
-			height: 100%;
+		header {
+			min-height: 100vh;
+			min-height: 100svh;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+
 			padding-inline-start: var(--space-xs-2xl);
 			padding-inline-end: var(--space-xs-2xl);
+
 		}
 
-		main:last-child {
+		/* header:last-child { */
+		#navigation {
 			flex-grow: 1;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			margin-inline-start: 1em;
+			margin-block-end: 1em;
 		}
 
 		footer {
 			margin: 1em;
+			margin-block-start: 0;
 		}
 
 		h1 {
 			font-size: var(--step-10);
-			margin-block-start: var(--space-l-3xl);
-			margin-block-end: var(--space-l-3xl);
+			margin-block-start: calc(33.2vh - var(--step-10)); /* golden ratio, i guess */
+			margin-block-end: var(--space-m-3xl);
 		}
 
 		#timer {
 			font-size: var(--step-4);
 			line-height: 1.25em;
-			margin-block-end: calc( 2 * var(--space-l-3xl) );
 		}
 
-		.tiny {
-			font-size: var(--step--2);
-			line-height: 1.5em;
+		ul {
+			list-style-type: "> ";
+			margin-inline-start: 1em;
+			margin-block-end: -1em; /* dunno why there's extra margin at bottom */
+		}
+
+		li + li {
+			margin-block-start: 1em;
 		}
 
 		p {
@@ -95,14 +107,18 @@
 			To see if Slippi Ranked is free today, enable JavaScript.
 		</noscript>
 		<main>
-			<h1></h1>
-			<p id="timer"></p>
+			<header>
+				<h1></h1>
+				<p id="timer"></p>
+				<a href="#about" id="navigation">what?</a>
+			</header>
 		</main>
-		<footer class="tiny">
-			see <a href="https://slippi.gg">slippi.gg</a>
+		<footer>
+			<ul id="about">
+				<li>see <a href="https://slippi.gg">slippi.gg</a></li>
+				<li id="extra">and perhaps a mental health hotline: 1-800-273-TALK</li>
+				<li>also <a href="https://wonger.dev">me</a></li>
 			<br>
-			<span id="extra">and perhaps a mental health hotline: 1-800-273-TALK</span>
-			also <a href="https://wonger.dev">me</a>
 		</footer>
 	</body>
 
@@ -196,8 +212,8 @@
 				document.title = 'YES — Slippi Ranked is free to play'
 				h1.textContent = 'YES'
 				timer.textContent = `you have ${formatDuration(msRemaining)} left to grind!`
-				extra.style.display = 'block'
-				// favicon.href = 'data:image/svg+xml;utf8,<svg...>'
+				extra.style.display = 'list-item'
+				// https://emojicon.dev/
 				favicon.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>✔️</text></svg>"
 			}
 			else {
