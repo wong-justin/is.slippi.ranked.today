@@ -51,7 +51,6 @@
 
 			padding-inline-start: var(--space-xs-2xl);
 			padding-inline-end: var(--space-xs-2xl);
-
 		}
 
 		/* header:last-child { */
@@ -64,9 +63,20 @@
 			margin-block-end: 1em;
 		}
 
+		#navigation:visited {
+			color: black;
+  		text-decoration: none;
+		}
+
 		footer {
 			margin: 1em;
-			margin-block-start: 0;
+			margin-block-start: -1em;
+		}
+		
+		.question {
+			display: block;
+			margin-block-start: 1em;
+			font-weight: bold;
 		}
 
 		h1 {
@@ -83,7 +93,7 @@
 		ul {
 			list-style-type: "> ";
 			margin-inline-start: 1em;
-			margin-block-end: -1em; /* dunno why there's extra margin at bottom */
+			margin-block-start: 1em;
 		}
 
 		li + li {
@@ -111,15 +121,28 @@
 			<header>
 				<h1></h1>
 				<p id="timer"></p>
-				<a href="#about" id="navigation">what?</a>
 			</header>
 		</main>
 		<footer>
+			<a href="#about" class="question" id="navigation">what?</a>
 			<ul id="about">
-				<li>see <a href="https://slippi.gg">slippi.gg</a></li>
+				<li>take a look at <a href="https://slippi.gg">slippi.gg</a></li>
 				<li id="extra">and perhaps a mental health hotline: 1-800-273-TALK</li>
-				<li>also <a href="https://wonger.dev">me</a></li>
-			<br>
+			</ul>
+			<span class="question">when?</span>
+			<ul>
+				<li>
+					every four days, starting at 8 AM UTC!
+					the next free ranked days will be 
+					<span id="next-dates">...</span>
+					<noscript>needing JavaScript</noscript>
+				</li>
+			</ul>
+			<span class="question">who?</span>
+			<ul>
+				<li>the slippi guy is <a href="https://twitter.com/fizzi36">@Fizzi36</a>, along with a team of helpers.</li>
+				<li>but this little site is from <a href="https://wonger.dev">me</a></li>
+			</ul>
 		</footer>
 	</body>
 
@@ -160,6 +183,29 @@
 			let msRemaining = (isHappening ? prevEnd - now : nextStart - now )
 
 			return {isHappening, msRemaining}
+		}
+
+		let next7RankedDays = (now) => {
+			// now : int, millis since epoch in UTC
+			// returns : string[]
+
+			let dateStrings = []
+			let dateFormattingOptions = { day: 'numeric', month: 'long' }
+			let daysSinceFirstStart = Math.floor( (now - FREE_ACCESS_START_MS) / MS_PER_DAY )
+			let daysUntilNextStart = ( 4 - (daysSinceFirstStart % 4) )
+			let nextStart = FREE_ACCESS_START_MS + (daysSinceFirstStart + daysUntilNextStart) * MS_PER_DAY
+
+			let i = 0;
+			do {
+				let date = new Date(nextStart)
+				// TODO: learn how to get user's locale
+				let formattedDate = date.toLocaleDateString('en-US', dateFormattingOptions)
+				dateStrings.push(formattedDate)
+				nextStart += MS_BETWEEN_RANKED_DAYS
+				i += 1
+			} while (i < 7)
+
+			return dateStrings
 		}
 
 		let formatDuration = (millis) => {
