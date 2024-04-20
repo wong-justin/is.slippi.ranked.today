@@ -9,12 +9,23 @@
 		<!-- inline favicon and styles and scripts, and use system fonts -->
 
 		<style>
-			/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s&g=s,l,xl,12 */
-			
-			/* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s&g=s,l,xl,12 */
 
-			/* 5rem, 3.75rem, 2.5rem, 1.875rem, 1.25rem, 0.9375rem
-			*/
+		/* @link https://utopia.fyi/type/calculator?c=240,18,1.125,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s|xs-xl&g=s,l,xl,12 */
+
+		:root {
+		  --step--2: clamp(0.8rem, 0.9102rem + -0.1422vi, 0.8889rem);
+		  --step-0: clamp(1.125rem, 1.095rem + 0.2vi, 1.25rem);
+		  --step-4: clamp(1.802rem, 1.5021rem + 1.9996vi, 3.0518rem);
+		  --step-10: clamp(3.6532rem, 1.736rem + 12.7813vi, 11.6415rem);
+		}
+
+		/* @link https://utopia.fyi/space/calculator?c=240,18,1.2,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s&g=s,l,xl,12 */
+		
+		:root {
+			/* Custom pairs */
+  		--space-l-3xl: clamp(2.25rem, 0.99rem + 8.4vi, 7.5rem);
+  		--space-xs-2xl: clamp(0.875rem, -0.115rem + 6.6vi, 5rem);
+		}
 
 		* {
 			font-family: system-ui;
@@ -26,18 +37,18 @@
 		body {
 			min-height: 100vh;
 			min-height: 100svh;
-			display: grid;
-			place-items: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 		}
 
 		main {
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			/* justify-content: space-between; */
 			align-items: center;
-			padding-inline-start: 5rem;
-			padding-inline-end: 5rem;
+			padding-inline-start: var(--space-xs-2xl);
+			padding-inline-end: var(--space-xs-2xl);
 		}
 
 		main:last-child {
@@ -45,30 +56,27 @@
 		}
 
 		footer {
-			position: absolute;
-			bottom: 0;
-			left: 0;
 			margin: 1em;
 		}
 
 		h1 {
-			font-size: 11.6415rem;
-			margin-block-start: 7.5rem;
-			margin-block-end: 7.5rem;
+			font-size: var(--step-10);
+			margin-block-start: var(--space-l-3xl);
+			margin-block-end: var(--space-l-3xl);
 		}
 
 		#timer {
-			font-size: 3.0518rem;
-			letter-spacing: -0.025rem;
+			font-size: var(--step-4);
 			line-height: 1.25em;
+			margin-block-end: calc( 2 * var(--space-l-3xl) );
 		}
 
 		.tiny {
-			font-size: 0.8rem;
+			font-size: var(--step--2);
 		}
 
 		p {
-			font-size: 1.25rem;
+			font-size: var(--step-0);
 			text-align: center;
 		}
 
@@ -87,7 +95,6 @@
 		<main>
 			<h1></h1>
 			<p id="timer"></p>
-			<!-- <p id="placeholder"></p> -->
 		</main>
 		<footer class="tiny">
 			see <a href="https://slippi.gg">slippi.gg</a>
@@ -101,7 +108,6 @@
 		let h1 = document.querySelector('h1')
 		let timer = document.querySelector('#timer')
 		let extra = document.querySelector('#extra')
-		// let placeholder = document.querySelector('#placeholder')
 
 		// https://github.com/project-slippi/slippi-launcher/pull/434/files#diff-44b494a9d47f2927c5fc59ecbf1419262f55cd74bf503c9b2c3767a2fbf985bcR15-R70
 
@@ -190,10 +196,8 @@
 				extra.style.display = 'none'
 			}
 
-			// placeholder.style.display = 'none'
 		}
 
-		// placeholder.textContent = 'thinking...'
 		window.setInterval(update, 1000)
 
 
