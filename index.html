@@ -23,8 +23,9 @@
 		/* @link https://utopia.fyi/space/calculator?c=240,18,1.2,1240,20,1.25,10,5,&s=0.75|0.5|0.25,1.5|2|3|4|6,9|3xs-s&g=s,l,xl,12 */
 		
 		:root {
+  		--space-m: clamp(1.6875rem, 1.6425rem + 0.3vi, 1.875rem);
+
 			/* Custom pairs */
-			--space-m-3xl: clamp(1.6875rem, 0.2925rem + 9.3vi, 7.5rem);
   		--space-xs-2xl: clamp(0.875rem, -0.115rem + 6.6vi, 5rem);
 		}
 
@@ -71,7 +72,7 @@
 		h1 {
 			font-size: var(--step-10);
 			margin-block-start: calc(33.2vh - var(--step-10)); /* golden ratio, i guess */
-			margin-block-end: var(--space-m-3xl);
+			margin-block-end: var(--space-m);
 		}
 
 		#timer {
