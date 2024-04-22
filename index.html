@@ -136,12 +136,11 @@
 				<p id="timer"></p>
 			</header>
 		</main>
-		<footer>
+		<footer id="faq">
 			<a href="#faq" class="question" id="navigation">what?</a>
-			<ul id="faq">
+			<ul>
 				<li>check out <a href="https://slippi.gg">slippi.gg</a>, which solves matchmaking for the best game in the world</li>
 				<li>unlimited ranked access is $5 USD per month, but some days you can try ranked for free</li>
-				<li id="extra">if you're interested in ranked, you might want a mental health hotline too: 1-800-273-TALK</li>
 			</ul>
 			<span class="question">when?</span>
 			<ul>
@@ -157,6 +156,12 @@
 				<li>the main slippi dev is <a href="https://twitter.com/fizzi36">@Fizzi36</a>, along with a team of contributors</li>
 				<li>but this little site is from <a href="https://wonger.dev">me</a></li>
 			</ul>
+			<div id="extra">
+				<span class="question">also...</span>
+				<ul>
+					<li>after trying ranked, you might want a mental health hotline: 1-800-273-TALK</li>
+				</ul>
+			</div>
 		</footer>
 	</body>
 
@@ -284,7 +289,7 @@
 				document.title = 'YES — Slippi Ranked is free to play right now'
 				h1.textContent = 'YES'
 				timer.textContent = `you have ${formatDuration(msRemaining)} left to grind!`
-				extra.style.display = 'list-item'
+				extra.style.display = 'block' // 'list-item'
 				// https://emojicon.dev/
 				favicon.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1em' font-size='80'>✔️</text></svg>"
 			}
