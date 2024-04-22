@@ -207,6 +207,7 @@
 			// returns : string[]
 
 			let dateStrings = []
+			let weekdayFormattingOptions = { weekday: 'long' }
 			let dateFormattingOptions = { day: 'numeric', month: 'long' }
 			let daysSinceFirstStart = Math.floor( (now - FREE_ACCESS_START_MS) / MS_PER_DAY )
 			let daysUntilNextStart = 4 - (daysSinceFirstStart % 4)
@@ -216,7 +217,11 @@
 			do {
 				let date = new Date(nextStart)
 				// TODO: learn how to get user's locale
-				let formattedDate = date.toLocaleDateString('en-US', dateFormattingOptions)
+				let formattedDate = (
+					date.toLocaleDateString('en-US', weekdayFormattingOptions) + 
+					' ' + 
+					date.toLocaleDateString('en-US', dateFormattingOptions)
+				)
 				dateStrings.push(formattedDate)
 				nextStart += MS_BETWEEN_RANKED_DAYS
 				i += 1
